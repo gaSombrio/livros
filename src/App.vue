@@ -27,7 +27,7 @@
     
   </header>
   <main>
-    <section>
+    <section class="bio">
       <div class="eric">
         <span>Autor de Abril</span>
         <h2>Eric-Emanuel Schimitt</h2>
@@ -38,8 +38,102 @@
       </div>
       <div class="livro">
         <img src="/public/Schmitt_Nocognia_3D_500pcx 1.png" alt="">
+        <p>*within the stock limit</p>
       </div>
-      <p>*within the stock limit</p>
+    </section>
+    <section class="info">
+        <div class="frete">
+          <img src="/public/Truck.png" alt="">
+          <p class="txt">Frete grátis pra SC</p>
+        </div>
+        <div class="recomendados">
+          <img src="/public/Star.png" alt="">
+          <p class="txt">Livros recomendados</p>
+        </div>
+        <div class="vendas">
+          <img src="/public/Book open.png" alt="">
+          <p class="txt">Mais vendidos</p>
+        </div>
+    </section>
+    <section class="lancamentos">
+      <h2>Lançamentos</h2>
+      <div class="cima">
+        <div>
+          <img src="/public/Chain of Iron: Volume 2.png" alt="">
+          <h3>Chain of Iron: Volume 2</h3>
+          <p>Cassandra Clare</p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+          <input type="button" placeholder="Comprar">
+        </div>
+        <div>
+          <img src="/public/Chain of Thorns.png" alt="">
+          <h3>Chain of Thorns</h3>
+          <p>Cassandra Clare</p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="/public/City of Fallen Angels.png" alt="">
+          <h3></h3>
+          <p>Cassandra Clare</p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="" alt="">
+          <h3></h3>
+          <p>Cassandra Clare</p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="baixo">
+        <div>
+          <img src="" alt="">
+          <h3></h3>
+          <p></p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="" alt="">
+          <h3></h3>
+          <p></p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="" alt="">
+          <h3></h3>
+          <p></p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+        <div>
+          <img src="" alt="">
+          <h3></h3>
+          <p></p>
+          <div>
+            <p class="preço">R$23.24</p>
+            <img src="/public/like.png" alt="">
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -128,6 +222,73 @@ nav a {
   padding-right: 20px;
 }
 
+main{
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.bio {
+  display: flex;
+    padding: 4vw 10vw;
+    border-bottom: 1px solid #27AE60;
+
+}
+.bio .eric {
+  margin-top: 7vw;
+  margin-left: 6vw;
+}
+.bio .eric span {
+  color: #27AE60;
+  border: 1px solid;
+  border-color: #27AE60;
+  border-radius: 2px;
+  padding: 12px 8px;
+}
+.bio .eric h2 {
+  font-weight: bold;
+  font-size: 3rem;
+  color: #382C2C;
+  margin-top: 3vw;
+}
+.bio .eric p {
+  color: #4D4C4C;
+  width: 60%;
+  font-size: 1.1rem;
+}
+.bio .eric button{
+  background-color: #27AE60;
+  border: none;
+  color: white;
+  padding: 14px 25px;
+  font-size: 1.1rem;
+  margin-top: 2vw;
+}
+.bio .livro {
+  margin-right: 6vw;
+}
+.bio .livro p {
+  margin-left: 14vw;
+}
+
+.info {
+  padding: 2vw 5vw 3vw 5vw;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #27AE60;
+}
+.info div {
+  display: flex;
+  color: #231F2D;
+  padding: 10px 7vw;
+  
+}
+.info .txt {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-left: 15px;
+}
+.info .recomendados {
+  border-left: 2px solid #937DC2;
+  border-right: 2px solid #937DC2;
+}
 
 </style>
