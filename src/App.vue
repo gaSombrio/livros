@@ -61,77 +61,83 @@
         <div>
           <img src="/public/Chain of Iron: Volume 2.png" alt="">
           <h3>Chain of Iron: Volume 2</h3>
-          <p>Cassandra Clare</p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
-          <input type="button" placeholder="Comprar">
+          <p class="autor">Cassandra Clare</p>
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+
+          <input type="button" value="Comprar">
         </div>
         <div>
           <img src="/public/Chain of Thorns.png" alt="">
           <h3>Chain of Thorns</h3>
-          <p>Cassandra Clare</p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <p class="autor">Cassandra Clare</p>
+
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+
+          <input type="button" value="Comprar">
         </div>
         <div>
           <img src="/public/City of Fallen Angels.png" alt="">
-          <h3></h3>
-          <p>Cassandra Clare</p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <h3>City of Fallen Angels</h3>
+          <p class="autor">Cassandra Clare</p>
+
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+
+          <input type="button" value="Comprar">
         </div>
         <div>
-          <img src="" alt="">
-          <h3></h3>
-          <p>Cassandra Clare</p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <img src="/public/Nona the Ninth.png" alt="">
+          <h3>Nona the Ninth</h3>
+          <p class="autor">Cassandra Clare</p>
+
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+    
+          <input type="button" value="Comprar">
         </div>
       </div>
       <div class="baixo">
         <div>
-          <img src="" alt="">
-          <h3></h3>
-          <p></p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <img src="/public/Harlem Shuffle.png" alt="">
+          <h3>Harlem Shuffle</h3>
+          <p class="autor">Colson Whitehead</p>
+   
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+    
+          <input type="button" value="Comprar">
         </div>
         <div>
-          <img src="" alt="">
-          <h3></h3>
-          <p></p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <img src="/public/Two Old Women.png" alt="">
+          <h3>Two Old Women</h3>
+          <p class="autor">Velma Wallis</p>
+        
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+         
+          <input type="button" value="Comprar">
         </div>
         <div>
-          <img src="" alt="">
-          <h3></h3>
-          <p></p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <img src="/public/Carrie Soto Is Back.png" alt="">
+          <h3>Carrie Soto Is Back</h3>
+          <p class="autor">Taylor Jenkins Reid</p>
+        
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+     
+          <input type="button" value="Comprar">
         </div>
         <div>
-          <img src="" alt="">
-          <h3></h3>
-          <p></p>
-          <div>
-            <p class="preço">R$23.24</p>
-            <img src="/public/like.png" alt="">
-          </div>
+          <img src="/public/Book Lovers.png" alt="">
+          <h3>Book Lovers</h3>
+          <p class="autor">Emily Henry</p>
+        
+            <p class="preco">R$23.24</p>
+            <span><img src="/public/like.png" alt=""></span>
+          
+          <input type="button" value="Comprar">
         </div>
       </div>
     </section>
@@ -264,9 +270,12 @@ main{
 }
 .bio .livro {
   margin-right: 6vw;
+
 }
 .bio .livro p {
-  margin-left: 14vw;
+  margin: 0 0 5vw 14vw;
+  position: absolute;
+
 }
 
 .info {
@@ -291,4 +300,42 @@ main{
   border-right: 2px solid #937DC2;
 }
 
+.lancamentos {
+  padding: 6vw 6vw;
+}
+.lancamentos h2 {
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-left: 5vw;
+}
+.lancamentos .cima {
+  display: flex;
+  justify-content: center;
+}
+.lancamentos .baixo {
+  display: flex;
+  justify-content: center;
+}
+.lancamentos .cima div {
+  padding: 1.5vw;
+}
+.lancamentos .baixo div {
+  padding: 1.5vw;
+}
+.lancamentos .cima h3 {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+.lancamentos .cima .autor {
+  color: #4F4C57;
+}
+.lancamentos .cima .preco {
+  font-weight: bold;
+}
+.lancamentos .cima span {
+  margin-left: 30px;
+}
+.lancamentos .cima .input {
+  background-color: #27AE60;
+}
 </style>
