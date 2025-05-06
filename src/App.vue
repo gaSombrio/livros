@@ -1,62 +1,95 @@
 <script setup>
+import { ref } from 'vue';
 const produtos = [
-    {
-        id: 1,
-        titulo: 'Chain of Iron: Volume 2',
-        resenha: 'Cassandra Clare',
-        preco: 23.24,
-        capa: 'https://cdn.kobo.com/book-images/6db37b19-2d7d-4e5b-a1d8-b006188c9db4/1200/1200/False/the-last-hours-chain-of-iron.jpg',
-    },
-    {
-        id: 2,
-        titulo: 'Chain of Thorns',
-        resenha: 'Cassandra Clare',
-        preco: 23.24,
-        capa: 'https://cdn.kobo.com/book-images/4aa958d8-c1ed-4bf2-90ce-fef019f92a15/353/569/90/False/the-last-hours-chain-of-thorns.jpg',
-    },
-    {
-        id: 3,
-        titulo: 'City of Fallen Angels',
-        resenha: 'Cassandra Clare',
-        preco: 13.94,
-        capa: 'https://m.media-amazon.com/images/I/815MzJpG6iL._AC_UF1000,1000_QL80_.jpg',
-    },
-    {
-        id: 4,
-        titulo: 'Nona the Ninth',
-        resenha: 'Cassandra Clare',
-        preco: 16.84,
-        capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThSjYxA73VNaIFSItXwUsuMHkRQo7f8PXGBg&s',
-    },
-    {
-        id: 5,
-        titulo: 'Harlem Shuffle',
-        resenha: 'Colson Whitehead',
-        preco: 26.92,
-        capa: 'https://m.media-amazon.com/images/I/81ZPFCh0xML.jpg',
-    },
-    {
-        id: 6,
-        titulo: 'Two Old Women',
-        resenha: 'Velma Wallis',
-        preco: 13.95,
-        capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXEMa4hM454G7Whh7PrDN8R_oYebpPdFl_Q&s',
-    },
-    {
-        id: 7,
-        titulo: 'Carrie Soto Is Back',
-        resenha: 'Taylor Jenkins Reid',
-        preco: 26.04,
-        capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
-    },
-    {
-        id: 8,
-        titulo: 'Book Lovers',
-        resenha: 'Emily Henry',
-        preco: 15.81,
-        capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
-    }
+  {
+    id: 1,
+    titulo: 'Chain of Iron: Volume 2',
+    resenha: 'Cassandra Clare',
+    preco: 23.24,
+    capa: 'https://cdn.kobo.com/book-images/6db37b19-2d7d-4e5b-a1d8-b006188c9db4/1200/1200/False/the-last-hours-chain-of-iron.jpg',
+  },
+  {
+    id: 2,
+    titulo: 'Chain of Thorns',
+    resenha: 'Cassandra Clare',
+    preco: 23.24,
+    capa: 'https://cdn.kobo.com/book-images/4aa958d8-c1ed-4bf2-90ce-fef019f92a15/353/569/90/False/the-last-hours-chain-of-thorns.jpg',
+  },
+  {
+    id: 3,
+    titulo: 'City of Fallen Angels',
+    resenha: 'Cassandra Clare',
+    preco: 13.94,
+    capa: 'https://m.media-amazon.com/images/I/815MzJpG6iL._AC_UF1000,1000_QL80_.jpg',
+  },
+  {
+    id: 4,
+    titulo: 'Nona the Ninth',
+    resenha: 'Cassandra Clare',
+    preco: 16.84,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThSjYxA73VNaIFSItXwUsuMHkRQo7f8PXGBg&s',
+  },
+  {
+    id: 5,
+    titulo: 'Harlem Shuffle',
+    resenha: 'Colson Whitehead',
+    preco: 26.92,
+    capa: 'https://m.media-amazon.com/images/I/81ZPFCh0xML.jpg',
+  },
+  {
+    id: 6,
+    titulo: 'Two Old Women',
+    resenha: 'Velma Wallis',
+    preco: 13.95,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXEMa4hM454G7Whh7PrDN8R_oYebpPdFl_Q&s',
+  },
+  {
+    id: 7,
+    titulo: 'Carrie Soto Is Back',
+    resenha: 'Taylor Jenkins Reid',
+    preco: 26.04,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
+  },
+  {
+    id: 8,
+    titulo: 'Book Lovers',
+    resenha: 'Emily Henry',
+    preco: 15.81,
+    capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
+  }
 ];
+const mostrarCarrinho = ref(false);
+const produtoSelecionado = ref(null);
+
+function abrirCarrinho(produto) {
+  produtoSelecionado.value = produto;
+  mostrarCarrinho.value = true;
+}
+
+function voltarParaLoja() {
+  mostrarCarrinho.value = false;
+}
+const carrinho = [
+  {
+    id: 7,
+    titulo: 'Carrie Soto Is Back',
+    resenha: 'Taylor Jenkins Reid',
+    preco: 26.04,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
+  },
+  {
+    id: 8,
+    titulo: 'Book Lovers',
+    resenha: 'Emily Henry',
+    preco: 15.81,
+    capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
+    quantidade: 1,
+  }
+];
+
+function diminuir(qnt) {
+
+}
 </script>
 
 <template>
@@ -65,7 +98,6 @@ const produtos = [
       <span class="main">IFbooks</span>
       <span class="sub">Apreço à leitura</span>
     </div>
-
     <div class="search-box">
       <input type="text" placeholder="Pesquisar" />
       <i class="fas fa-search search-icon"></i>
@@ -77,20 +109,21 @@ const produtos = [
       <a href="#">Envio</a>
       <a href="#">Devoluções</a>
     </nav>
-      <div class="elements">
-        <a href="" class="barra"><img src="/public/cart.svg" alt=""></a>
-        <a href="" class="barra"><img src="/public/heart.svg" alt=""></a>
-        <a href=""><img src="/public/profile.svg" alt=""></a>
-      </div>
-    
+    <div class="elements">
+      <button class="barra" @click="abrirCarrinho(produto)"><img src="/public/cart.svg" alt=""></button>
+      <button class="barra"><img src="/public/heart.svg" alt=""></button>
+      <button><img src="/public/profile.svg" alt=""></button>
+    </div>
+
   </header>
   <main>
-    <section class="bio">
+    <section class="bio" v-if="!mostrarCarrinho">
       <div class="eric">
         <span>Autor de Abril</span>
         <h2>Eric-Emanuel Schimitt</h2>
         <p>
-          Eric-Emmanuel Schmitt has been awarded more than 20 literary prizes and distinctions, and in 2001 he received the title of Chevalier des Arts et des Lettres. His books have been translated into over 40 languages.
+          Eric-Emmanuel Schmitt has been awarded more than 20 literary prizes and distinctions, and in 2001 he received
+          the title of Chevalier des Arts et des Lettres. His books have been translated into over 40 languages.
         </p>
         <button>Acessar página do livro</button>
       </div>
@@ -99,127 +132,81 @@ const produtos = [
         <p>*within the stock limit</p>
       </div>
     </section>
-    <section class="info">
-        <div class="frete">
-          <img src="/public/Truck.png" alt="">
-          <p class="txt">Frete grátis pra SC</p>
-        </div>
-        <div class="recomendados">
-          <img src="/public/Star.png" alt="">
-          <p class="txt">Livros recomendados</p>
-        </div>
-        <div class="vendas">
-          <img src="/public/Book open.png" alt="">
-          <p class="txt">Mais vendidos</p>
-        </div>
+    <section class="info" v-if="!mostrarCarrinho">
+      <div class="frete">
+        <img src="/public/Truck.png" alt="">
+        <p class="txt">Frete grátis pra SC</p>
+      </div>
+      <div class="recomendados">
+        <img src="/public/Star.png" alt="">
+        <p class="txt">Livros recomendados</p>
+      </div>
+      <div class="vendas">
+        <img src="/public/Book open.png" alt="">
+        <p class="txt">Mais vendidos</p>
+      </div>
     </section>
-    
-    <section class="lancamentos">
-      
+
+    <section class="lancamentos" v-if="!mostrarCarrinho">
       <h2>Lançamentos</h2>
-      <div class="cima">
-        <div>
-          <img src="/public/Chain of Iron: Volume 2.png" alt="">
-          <h3>Chain of Iron: Volume 2</h3>
-          <p class="autor">Cassandra Clare</p>
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
 
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/Chain of Thorns.png" alt="">
-          <h3>Chain of Thorns</h3>
-          <p class="autor">Cassandra Clare</p>
+      <div class="lista-produtos">
+        <div class="produto" v-for="produto in produtos" :key="produto.id">
+          <img :src="produto.capa" alt="" width="70%">
+          <h3>{{ produto.titulo }}</h3>
+          <p>{{ produto.resenha }}</p>
+          <p class="preco">R${{ produto.preco }}</p>
+          <button @click="abrirCarrinho(produto)">Comprar </button>
 
-            <p class="preco">R$23.24  <span class="like"><img src="/public/like.png" alt=""></span></p>
-           
-
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/City of Fallen Angels.png" alt="">
-          <h3>City of Fallen Angels</h3>
-          <p class="autor">Cassandra Clare</p>
-
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
-
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/Nona the Ninth.png" alt="">
-          <h3>Nona the Ninth</h3>
-          <p class="autor">Cassandra Clare</p>
-
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
-    
-          <input type="button" value="Comprar">
-        </div>
-      </div>
-      <div class="baixo">
-        <div>
-          <img src="/public/Harlem Shuffle.png" alt="">
-          <h3>Harlem Shuffle</h3>
-          <p class="autor">Colson Whitehead</p>
-   
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
-    
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/Two Old Women.png" alt="">
-          <h3>Two Old Women</h3>
-          <p class="autor">Velma Wallis</p>
-        
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
-         
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/Carrie Soto Is Back.png" alt="">
-          <h3>Carrie Soto Is Back</h3>
-          <p class="autor">Taylor Jenkins Reid</p>
-        
-            <p class="preco">R$23.24 <span class="like"><img src="/public/like.png" alt=""></span></p>
-            
-     
-          <input type="button" value="Comprar">
-        </div>
-        <div>
-          <img src="/public/Book Lovers.png" alt="">
-          <h3>Book Lovers</h3>
-          <p class="autor">Emily Henry</p>
-        
-            <p class="preco">R$23.24  <span class="like"><img src="/public/like.png" alt=""></span></p>
-           
-          
-          <input type="button" value="Comprar">
         </div>
       </div>
     </section>
 
 
-    <section class="carrinho">
+
+    <section class="carrinho" v-if="mostrarCarrinho">
       <h2>Carrinho</h2>
-      <div class="classes"><h3>Título</h3> <h3 class="q">Quantidade</h3> <h3>Subtotal</h3></div>
-
-      <input class="loja" type="button" Value="Voltar para loja">
-
-      <div>
-        <input class="cupom" type="text" placeholder="código do cupom"> <input class="inserircpm" type="button" value="Inserir Cupom"> 
+      <div class="classes">
+        <h3>Título</h3>
+        <h3 class="q">Quantidade</h3>
+        <h3>Subtotal</h3>
       </div>
 
-      <div class="final">
-        <h3>Total da Compra</h3>
-        <p>produtos:</p>
-        <p>Frete:</p>
-        <p>Total: </p>
-        <input type="button" value="Ir para o pagamento">
+      <div class="compras" v-for="produto in carrinho" :key="produto.id">
+        <div>
+          <img :src="produto.capa" alt="" width="8%">
+          <div>
+            <h3>{{ produto.titulo }}</h3>
+            <p>{{ produto.resenha }}</p>
+            <p class="preco">R${{ produto.preco }}</p>
+          </div>
+        </div>
+
+        <div>
+          <button @click="">-</button>
+          <strong>{{ produto.quantidade }}</strong>
+          <button>+</button>
+        </div>
+
+
       </div>
+
+      <button class="Vloja" @click="voltarParaLoja">Voltar para a loja</button>
+      <div class="compra">
+        <div>
+          <input class="cupom" type="text" placeholder="código do cupom"> <input class="inserircpm" type="button"
+            value="Inserir Cupom">
+        </div>
+
+        <div class="final">
+          <h3>Total da Compra</h3>
+          <p class="linha">Produtos:</p>
+          <p class="linha">Frete:Grátis</p>
+          <p>Total: </p>
+          <input type="button" value="Ir para o pagamento">
+        </div>
+      </div>
+
     </section>
 
 
@@ -239,7 +226,7 @@ const produtos = [
           <p>+55 47 40045263</p>
         </div>
         <div class="redes">
-           <img src="/public/Icon (1).svg" alt="">
+          <img src="/public/Icon (1).svg" alt="">
           <p>8h às 23h - Seg a Sex</p>
         </div>
         <div class="redes">
@@ -331,62 +318,75 @@ nav a {
   font-size: 14px;
   margin: 0 2vw 0 0;
 }
-.elements{
+
+.elements {
   display: flex;
   padding-right: 70px;
 }
-.elements a {
-  margin: 10px;
+
+.elements button {
+  border: none;
+  background-color: white;
+  margin-left: 15px;
 }
-.elements a.barra {
+
+.elements .barra {
   border-right: 1px solid #4CAF50;
   padding-right: 20px;
 }
 
-main{
+main {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .bio {
   display: flex;
-    padding: 4vw 10vw;
-    border-bottom: 1px solid #27AE60;
+  padding: 4vw 10vw;
+  border-bottom: 1px solid #27AE60;
 
 }
+
 .bio .eric {
   margin-top: 7vw;
   margin-left: 6vw;
 }
+
 .bio .eric span {
   color: #27AE60;
   border: 1px solid;
   border-color: #27AE60;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 12px 8px;
 }
+
 .bio .eric h2 {
   font-weight: bold;
   font-size: 3rem;
   color: #382C2C;
   margin-top: 3vw;
 }
+
 .bio .eric p {
   color: #4D4C4C;
   width: 60%;
   font-size: 1.1rem;
 }
-.bio .eric button{
+
+.bio .eric button {
   background-color: #27AE60;
   border: none;
   color: white;
   padding: 14px 25px;
   font-size: 1.1rem;
   margin-top: 2vw;
+  border-radius: 4px;
 }
+
 .bio .livro {
   margin-right: 6vw;
 
 }
+
 .bio .livro p {
   margin: 0 0 5vw 14vw;
   position: absolute;
@@ -399,17 +399,20 @@ main{
   justify-content: center;
   border-bottom: 1px solid #27AE60;
 }
+
 .info div {
   display: flex;
   color: #231F2D;
   padding: 10px 7vw;
-  
+
 }
+
 .info .txt {
   font-weight: bold;
   font-size: 1rem;
   margin-left: 15px;
 }
+
 .info .recomendados {
   border-left: 2px solid #937DC2;
   border-right: 2px solid #937DC2;
@@ -418,78 +421,84 @@ main{
 .lancamentos {
   padding: 6vw 6vw;
 }
+
+.lancamentos img {
+  border-radius: 5px;
+  max-height: 19vw;
+}
+
 .lancamentos h2 {
   font-weight: bold;
   font-size: 2.5rem;
-  margin-left: 5vw;
+  margin-left: 8vw;
+  padding-bottom: 2vw;
 }
-.lancamentos .cima {
-  display: flex;
-  justify-content: center;
-}
-.lancamentos .baixo {
-  display: flex;
-  justify-content: center;
-}
-.lancamentos .cima div {
-  padding: 1.5vw;
-}
-.lancamentos .baixo div {
-  padding: 1.5vw;
-}
-.lancamentos .cima h3 {
-  font-weight: bold;
+
+.lancamentos h3 {
   font-size: 1.6rem;
 }
-.lancamentos .cima .autor {
+
+.lancamentos p {
   color: #4F4C57;
 }
-.lancamentos .cima .preco {
+
+.lancamentos .preco {
   font-weight: bold;
+  color: #382C2C;
+  font-size: 1.3rem;
 }
-.lancamentos .cima span {
-  margin-left: 30px;
-}
-.lancamentos .cima .input {
-  background-color: #27AE60;
-}
-.lancamentos .baixo .preco {
-    font-weight: bold;
-  }
-span img {
-  margin-left: 150px;
-}
-.lancamentos input {
+
+.lancamentos button {
+  color: white;
   background-color: #27AE60;
   border: none;
-  padding: 20px 100px;
-  border-radius: 3px;
-  color: white;
-  font-size: 1.2rem;
+  border-radius: 4px;
+  padding: 1vw 5vw;
   font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 6vw;
+}
+
+.lista-produtos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 8vw;
+}
+
+.produto {
+  flex: 0 0 calc(25% - 16px);
+  box-sizing: border-box;
+  padding: 2px;
 }
 
 .carrinho {
-  padding: 8vw ;
-  
+  padding: 8vw;
+
 }
+
 .carrinho h2 {
-  color:  #27AE60;
+  color: #27AE60;
+  font-size: 4rem;
+  margin-left: 2vw;
+  margin-bottom: 8vw;
 }
+
 .carrinho .classes {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #27AE60;
 }
-.carrinho .classes h3{
+
+.carrinho .classes h3 {
   margin: 0 3vw 1vw;
   font-size: 2rem;
 }
+
 .carrinho .classes .q {
   margin-left: 16vw;
 }
 
-.carrinho .loja {
+.carrinho .Vloja {
   margin-top: 6vw;
   border: 2px solid #aaaaaa;
   background-color: white;
@@ -498,6 +507,7 @@ span img {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
 .carrinho .cupom {
   margin-top: 6vw;
   border: 2px solid #000000;
@@ -507,6 +517,7 @@ span img {
   font-weight: bold;
   font-size: 1.2rem;
 }
+
 .carrinho .inserircpm {
   margin-top: 6vw;
   border: none;
@@ -519,19 +530,50 @@ span img {
   margin-left: 1vw;
 }
 
+.carrinho .compra {
+  display: flex;
+}
+
+.carrinho .final {
+  border: 2px solid black;
+  margin-left: 28vw;
+  margin-top: 6vw;
+  padding: 1vw;
+  border-radius: 5px;
+}
+
+.carrinho .final h3 {
+  font-size: 1.6rem;
+}
+
+.carrinho .final .linha {
+  border-bottom: 1px solid #000000;
+  padding-right: 17vw;
+  padding-bottom: 1vw;
+}
+
+.carrinho .final input {
+  background-color: #27AE60;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  margin-left: 3vw;
+}
 
 
 footer {
   background-color: #27AE60;
-  padding: 3vw 8vw 1vw ;
-  font-family: Arial, Helvetica, sans-serif; 
+  padding: 3vw 8vw 1vw;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 .pe {
   display: flex;
   justify-content: space-between;
 }
 
-/*lado esquerdo*/
 .pe .unha {
   color: white;
   font-size: 1.2vw;
@@ -552,6 +594,7 @@ footer {
   font-size: 1.1vw;
   margin-right: 15px;
 }
+
 .ifbook .redes {
   display: flex;
   align-items: center;
@@ -574,7 +617,7 @@ footer {
 /*theLast*/
 
 
-.theLast{
+.theLast {
   border-top: 1px solid white;
   color: #ffffff9c;
   font-size: 1.2vw;
