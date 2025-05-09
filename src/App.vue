@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue';
+import { reactive } from 'vue'
+import { computed } from 'vue'
 const produtos = [
   {
     id: 1,
@@ -69,13 +71,62 @@ function abrirCarrinho(produto) {
 function voltarParaLoja() {
   mostrarCarrinho.value = false;
 }
-const carrinho = [
+const carrinho = reactive([
+{
+    id: 1,
+    titulo: 'Chain of Iron: Volume 2',
+    resenha: 'Cassandra Clare',
+    preco: 23.24,
+    capa: 'https://cdn.kobo.com/book-images/6db37b19-2d7d-4e5b-a1d8-b006188c9db4/1200/1200/False/the-last-hours-chain-of-iron.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 2,
+    titulo: 'Chain of Thorns',
+    resenha: 'Cassandra Clare',
+    preco: 23.24,
+    capa: 'https://cdn.kobo.com/book-images/4aa958d8-c1ed-4bf2-90ce-fef019f92a15/353/569/90/False/the-last-hours-chain-of-thorns.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 3,
+    titulo: 'City of Fallen Angels',
+    resenha: 'Cassandra Clare',
+    preco: 13.94,
+    capa: 'https://m.media-amazon.com/images/I/815MzJpG6iL._AC_UF1000,1000_QL80_.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 4,
+    titulo: 'Nona the Ninth',
+    resenha: 'Cassandra Clare',
+    preco: 16.84,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThSjYxA73VNaIFSItXwUsuMHkRQo7f8PXGBg&s',
+    quantidade: 0,
+  },
+  {
+    id: 5,
+    titulo: 'Harlem Shuffle',
+    resenha: 'Colson Whitehead',
+    preco: 26.92,
+    capa: 'https://m.media-amazon.com/images/I/81ZPFCh0xML.jpg',
+    quantidade: 0,
+  },
+  {
+    id: 6,
+    titulo: 'Two Old Women',
+    resenha: 'Velma Wallis',
+    preco: 13.95,
+    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXEMa4hM454G7Whh7PrDN8R_oYebpPdFl_Q&s',
+    quantidade: 0,
+  },  
   {
     id: 7,
     titulo: 'Carrie Soto Is Back',
     resenha: 'Taylor Jenkins Reid',
     preco: 26.04,
     capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
+    quantidade: 0,
   },
   {
     id: 8,
@@ -83,13 +134,23 @@ const carrinho = [
     resenha: 'Emily Henry',
     preco: 15.81,
     capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
-    quantidade: 1,
+    quantidade: 0,
   }
-];
-
-function diminuir(qnt) {
-
+]);
+function diminuir(produto) {
+  if (produto.quantidade > 0) {
+    produto.quantidade--;
+  }
 }
+
+function aumentar(produto) {
+  produto.quantidade++;
+}
+
+const totalProdutos = computed(() =>
+  carrinho.reduce((soma, produto) => soma + produto.preco * produto.quantidade, 0)
+);
+
 </script>
 
 <template>
@@ -156,7 +217,7 @@ function diminuir(qnt) {
           <h3>{{ produto.titulo }}</h3>
           <p>{{ produto.resenha }}</p>
           <p class="preco">R${{ produto.preco }}</p>
-          <button @click="abrirCarrinho(produto)">Comprar </button>
+          <button @click="abrirCarrinho(produto),aumentar(produto)">Comprar </button>
 
         </div>
       </div>
@@ -182,12 +243,15 @@ function diminuir(qnt) {
           </div>
         </div>
 
-        <div>
-          <button @click="">-</button>
+        <div class="contador">
+          <button @click="diminuir(produto)">-</button>
           <strong>{{ produto.quantidade }}</strong>
-          <button>+</button>
+          <button @click="aumentar(produto)">+</button>
         </div>
-
+        
+        <div class="subtotal">
+          <p>R$ {{ (produto.preco * produto.quantidade).toFixed(2) }}</p>
+        </div>
 
       </div>
 
@@ -200,11 +264,21 @@ function diminuir(qnt) {
 
         <div class="final">
           <h3>Total da Compra</h3>
-          <p class="linha">Produtos:</p>
-          <p class="linha">Frete:Grátis</p>
-          <p>Total: </p>
-          <input type="button" value="Ir para o pagamento">
-        </div>
+          <p class="linha">
+            <span>Produtos:</span>
+            <span class="valor">R$ {{ totalProdutos.toFixed(2) }}</span>
+         </p>
+          <p class="linha">
+            <span>Frete:</span>
+            <span class="valor">Grátis</span>
+          </p>
+           <p>
+             <span>Total:</span>
+             <span class="valor">R$ {{ totalProdutos.toFixed(2) }}</span>
+           </p>
+  <input type="button" value="Ir para o pagamento">
+</div>
+
       </div>
 
     </section>
@@ -508,6 +582,70 @@ main {
   font-size: 1.2rem;
 }
 
+.compras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.compras > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.compras img {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.compras h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.compras p {
+  font-size: 20px;
+  color: #382C2C;
+}
+
+.preco {
+  font-weight: bold;
+  color: #000;
+}
+.contador {
+  margin-right: 25vw;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.contador button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtotal {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  min-width: 80px;
+  text-align: right;
+  margin-right: 4.7vw;
+}
+
+
+
 .carrinho .cupom {
   margin-top: 6vw;
   border: 2px solid #000000;
@@ -534,32 +672,62 @@ main {
   display: flex;
 }
 
-.carrinho .final {
-  border: 2px solid black;
-  margin-left: 28vw;
-  margin-top: 6vw;
-  padding: 1vw;
-  border-radius: 5px;
+.final {
+  border: 2px solid #000000;
+  border-radius: 6px;
+  padding: 24px;
+  max-width: 300px;
+  margin: 110px auto;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin-left: 30vw;
 }
 
-.carrinho .final h3 {
-  font-size: 1.6rem;
+.final h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #000;
+}
+.final span.valor {
+  margin-left: 10vw;
+}
+.final .linha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #000000;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 6px;
+  font-weight: bold;
 }
 
-.carrinho .final .linha {
-  border-bottom: 1px solid #000000;
-  padding-right: 17vw;
-  padding-bottom: 1vw;
+.final p:last-of-type {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+  margin-top: 12px;
 }
 
-.carrinho .final input {
-  background-color: #27AE60;
+.final input[type="button"] {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: bold;
   color: white;
+  background-color: #2ecc71;
   border: none;
-  padding: 20px 40px;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  margin-left: 3vw;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.final input[type="button"]:hover {
+  background-color: #27ae60;
 }
 
 
