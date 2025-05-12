@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue';
-import { reactive } from 'vue'
-import { computed } from 'vue'
+import { ref, reactive, computed } from 'vue';
+
 const produtos = [
+
   {
     id: 1,
     titulo: 'Chain of Iron: Volume 2',
@@ -60,6 +60,7 @@ const produtos = [
     capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
   }
 ];
+
 const mostrarCarrinho = ref(false);
 const produtoSelecionado = ref(null);
 
@@ -71,72 +72,19 @@ function abrirCarrinho(produto) {
 function voltarParaLoja() {
   mostrarCarrinho.value = false;
 }
-const carrinho = reactive([
-{
-    id: 1,
-    titulo: 'Chain of Iron: Volume 2',
-    resenha: 'Cassandra Clare',
-    preco: 23.24,
-    capa: 'https://cdn.kobo.com/book-images/6db37b19-2d7d-4e5b-a1d8-b006188c9db4/1200/1200/False/the-last-hours-chain-of-iron.jpg',
-    quantidade: 0,
-  },
-  {
-    id: 2,
-    titulo: 'Chain of Thorns',
-    resenha: 'Cassandra Clare',
-    preco: 23.24,
-    capa: 'https://cdn.kobo.com/book-images/4aa958d8-c1ed-4bf2-90ce-fef019f92a15/353/569/90/False/the-last-hours-chain-of-thorns.jpg',
-    quantidade: 0,
-  },
-  {
-    id: 3,
-    titulo: 'City of Fallen Angels',
-    resenha: 'Cassandra Clare',
-    preco: 13.94,
-    capa: 'https://m.media-amazon.com/images/I/815MzJpG6iL._AC_UF1000,1000_QL80_.jpg',
-    quantidade: 0,
-  },
-  {
-    id: 4,
-    titulo: 'Nona the Ninth',
-    resenha: 'Cassandra Clare',
-    preco: 16.84,
-    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThSjYxA73VNaIFSItXwUsuMHkRQo7f8PXGBg&s',
-    quantidade: 0,
-  },
-  {
-    id: 5,
-    titulo: 'Harlem Shuffle',
-    resenha: 'Colson Whitehead',
-    preco: 26.92,
-    capa: 'https://m.media-amazon.com/images/I/81ZPFCh0xML.jpg',
-    quantidade: 0,
-  },
-  {
-    id: 6,
-    titulo: 'Two Old Women',
-    resenha: 'Velma Wallis',
-    preco: 13.95,
-    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXEMa4hM454G7Whh7PrDN8R_oYebpPdFl_Q&s',
-    quantidade: 0,
-  },  
-  {
-    id: 7,
-    titulo: 'Carrie Soto Is Back',
-    resenha: 'Taylor Jenkins Reid',
-    preco: 26.04,
-    capa: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGJROWBwFV4AHVxK1H0NNVTiEBBlVbmnf2gg&s',
-    quantidade: 0,
-  },
-  {
-    id: 8,
-    titulo: 'Book Lovers',
-    resenha: 'Emily Henry',
-    preco: 15.81,
-    capa: 'https://m.media-amazon.com/images/I/71Xy4AL7jKL.jpg',
-    quantidade: 0,
+
+const carrinho = reactive([]);
+
+function adicionarAoCarrinho(produto) {
+  const existente = carrinho.find(item => item.id === produto.id);
+  if (existente) {
+    existente.quantidade++;
+  } else {
+    carrinho.push({ ...produto, quantidade: 1 });
   }
-]);
+  mostrarCarrinho.value = true;
+}
+
 function diminuir(produto) {
   if (produto.quantidade > 0) {
     produto.quantidade--;
@@ -150,8 +98,8 @@ function aumentar(produto) {
 const totalProdutos = computed(() =>
   carrinho.reduce((soma, produto) => soma + produto.preco * produto.quantidade, 0)
 );
-
 </script>
+
 
 <template>
   <header>
@@ -217,7 +165,7 @@ const totalProdutos = computed(() =>
           <h3>{{ produto.titulo }}</h3>
           <p>{{ produto.resenha }}</p>
           <p class="preco">R${{ produto.preco }}</p>
-          <button @click="abrirCarrinho(produto),aumentar(produto)">Comprar </button>
+          <button @click="adicionarAoCarrinho(produto)">Comprar</button>
 
         </div>
       </div>
@@ -233,7 +181,8 @@ const totalProdutos = computed(() =>
         <h3>Subtotal</h3>
       </div>
 
-      <div class="compras" v-for="produto in carrinho" :key="produto.id">
+     <div class="compras" v-for="produto in carrinho.filter(p => p.quantidade > 0)" :key="produto.id">
+
         <div>
           <img :src="produto.capa" alt="" width="8%">
           <div>
